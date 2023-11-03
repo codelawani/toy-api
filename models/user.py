@@ -16,10 +16,10 @@ class User(Base):
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow)
 
-    name = Column(String(50))
+    name = Column(String(50), nullable=False)
     age = Column(Integer)
     location = Column(String(60))
-    email = Column(String(40))
+    email = Column(String(40), unique=True, nullable=False)
 
     def __init__(self, *args, **kwargs):
         """Initialise user model"""
