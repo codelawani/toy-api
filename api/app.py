@@ -1,4 +1,3 @@
-# from .views import app_views
 from models.user import User
 from flask import Flask, jsonify, request
 from os import getenv
@@ -51,7 +50,6 @@ def create_users():
     data = request.get_json()
     new_user = User(**data)
     storage.new(new_user)
-    print(new_user)
 
     return jsonify(new_user.to_dict()), 201
 
