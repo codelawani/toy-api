@@ -20,3 +20,30 @@ class User(db.Model):
 1. POST api/users: Create a new user
 2. GET api/users?id=1: Get a user by id
 3. GET api/users: Get all users
+
+
+### How to run
+1. Clone the repo
+   ```bash
+    git clone https://github.com/codelawani/toy-api.git
+   ```
+2. Create a virtual environment
+   ```bash
+    cd toy-api
+    python3 -m venv venv
+    source venv/bin/activate
+   ```
+3. Install the requirements
+   ```bash
+    pip install -r requirements.txt
+   ```
+4. Add env variables to a .env file - `DB_USER`, `DB_PASS`, `DB_HOST`, `DB_NAME`, `DB_PORT`
+5. Run  db setup script `db_setup.sh` (make sure you have mysql installed and take a look at the script before running it)
+   ```bash
+    chmod +x db_setup.sh
+    sudo ./db_setup.sh
+   ```
+6. Run the app
+    ```bash
+    python -m app.api
+    ```
