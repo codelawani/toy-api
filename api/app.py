@@ -1,4 +1,5 @@
-from models.user import User
+from marshmallow import ValidationError
+from models.user import User, UserSchema
 from flask import Flask, jsonify, request
 from os import getenv
 from models.engine import storage
@@ -47,7 +48,12 @@ def get_user_by_id(id):
 def create_users():
     if not request.is_json:
         return jsonify({'error': 'Expected Json data'}, 400)
-    data = request.get_json()
+
+    user_schema = UserSchema()
+    try:
+        data = user_schema.load(request.get_json())
+    except ValidationError as e:
+        return jsonify(e.messages), 400
     new_user = User(**data)
     storage.new(new_user)
 

@@ -1,3 +1,4 @@
+from marshmallow import Schema, fields, validate
 from sqlalchemy import Column, String, Integer, DateTime
 from uuid import uuid4
 from datetime import datetime
@@ -18,6 +19,7 @@ class User(Base):
     name = Column(String(50))
     age = Column(Integer)
     location = Column(String(60))
+    email = Column(String(40))
 
     def __init__(self, *args, **kwargs):
         """Initialise user model"""
@@ -44,3 +46,10 @@ class User(Base):
         from .engine import storage
         storage.save(obj)
         self.updated_at = datetime.now()
+
+
+class UserSchema(Schema):
+    email = fields.Email(required=True)
+    name = fields.Str(validate=validate.Length(min=1))
+    age = fields.Int()
+    location = fields.Str(validate=validate.Length(min=1))
